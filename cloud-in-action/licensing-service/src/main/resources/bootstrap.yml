@@ -3,7 +3,9 @@ spring:
     name: licensingservice
   profiles:
     active:
-      default
+      dev
   cloud:
     config:
       uri: http://localhost:8888
+encrypt:
+  key: Antiy

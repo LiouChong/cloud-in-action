@@ -1,5 +1,5 @@
-example.property: "I AM IN THE DEFAULT"
-spring.mysql.database: "MYSQL"
+example.property: "I AM IN THE dev"
+spring.jpa.database: "MYSQL"
 spring.datasource.platform:  "mysql"
 spring.jpa.show-sql: "true"
 spring.database.driverClassName: "com.mysql.cj.jdbc.Driver"

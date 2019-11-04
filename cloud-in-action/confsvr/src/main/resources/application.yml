@@ -4,6 +4,7 @@ spring:
   cloud:
     config:
       server:
+#---------------------------------------------
 #        禁止config服务器端解密（防止调用方直接拿到明文）
         encrypt:
           enabled: false
@@ -13,8 +14,10 @@ spring:
           search-paths: licensingservice
           username:
           password:
+#--------------------------------------------
 #        将配置信息从本地库读取。
 #        native:
 #          search-locations: file:D:\IDEA\IDEA_Space\cloud-in-action\cloud-in-action\confsvr\src\main\resources\config\licensingservice
+
 encrypt:
   key: Antiy

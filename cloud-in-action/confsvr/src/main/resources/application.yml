@@ -7,4 +7,4 @@ spring:
     config:
       server:
         native:
-          search-locations: file:G:\IDEA_SPACE\cloud-in-action\confsvr\src\main\resources\config\licensingservice
+          search-locations: file:D:\IDEA\IDEA_Space\cloud-in-action\cloud-in-action\confsvr\src\main\resources\config\licensingservice

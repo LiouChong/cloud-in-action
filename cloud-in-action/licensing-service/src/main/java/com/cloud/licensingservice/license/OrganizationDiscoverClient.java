@@ -2,7 +2,6 @@ package com.cloud.licensingservice.license;
 
 import com.cloud.licensingservice.pojo.Organization;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.HttpMethod;

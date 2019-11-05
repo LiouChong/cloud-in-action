@@ -2,9 +2,12 @@ package com.cloud.licensingservice.service;
 
 import com.cloud.licensingservice.config.ServiceConfig;
 import com.cloud.licensingservice.license.OrganizationDiscoverClient;
+import com.cloud.licensingservice.license.OrganizationFeignClient;
+import com.cloud.licensingservice.license.OrganizationRestTemplateClient;
 import com.cloud.licensingservice.pojo.License;
 import com.cloud.licensingservice.pojo.Organization;
 import com.cloud.licensingservice.repository.LicenseRepository;
+import com.netflix.discovery.converters.Auto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +24,11 @@ public class LicenseService {
     private LicenseRepository licenseRepository;
     @Autowired
     ServiceConfig config;
-    /*    @Autowired
-        OrganizationFeignClient organizationFeignClient;
-        @Autowired
-        OrganizationRestTemplcateClient organizationRestTemplcateClient;*/
+    @Autowired
+    OrganizationFeignClient organizationFeignClient;
+    @Autowired
+    OrganizationRestTemplateClient organizationRestClient;
+
     @Autowired
     OrganizationDiscoverClient organizationDiscoveryClient;
 
@@ -54,11 +58,11 @@ public class LicenseService {
         switch (clientType) {
             case "feign":
                 System.out.println("正在使用feign客户端");
-//                organization = organizationFeignClient.getOrganization(organizationId);
+                organization = organizationFeignClient.getOrganization(organizationId);
                 break;
             case "rest":
                 System.out.println("正在使用rest客户端");
-//                organization = organizationRestClient.getOrganization(organizationId);
+                organization = organizationRestClient.getOrganization(organizationId);
                 break;
             case "discovery":
                 System.out.println("正在使用服务发现客户端");

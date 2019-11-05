@@ -3,10 +3,12 @@ server:
 
 eureka:
   client:
-#    ²»ÒªÊ¹ÓÃEureka·şÎñ½øĞĞ×¢²á£¨ÒòÎªÕâÀïÊÇ·şÎñÆ÷¶Ë£©
+#    ä¸è¦ä½¿ç”¨eurekaæœåŠ¡è¿›è¡Œæ³¨å†Œï¼ˆåº”è¯¥å®¢æˆ·ç«¯æ³¨å†Œï¼‰
     register-with-eureka: false
-#    ²»ÒªÔÚ±¾µØ»º´æ×¢²á±íĞÅÏ¢
-  fetch-registry: false
+#    ä¸è¦åœ¨æœ¬åœ°ç¼“å­˜æ³¨å†Œè¡¨ä¿¡æ¯ï¼ˆåº”è¯¥å®¢æˆ·ç«¯ç¼“å­˜ï¼‰
+    fetchRegistry: false
   server:
-#    ÔÚ·şÎñÆ÷½ÓÊÕÇëÇóÖ®Ç°µÈ´ıµÄ³õÊ¼Ê±¼ä
+#    åœ¨æœåŠ¡å™¨æ¥æ”¶è¯·æ±‚ä¹‹å‰ç­‰å¾…çš„æ—¶é—´
     wait-time-in-ms-when-sync-empty: 5
+  service-url:
+    default-zone: http://localhost:8761

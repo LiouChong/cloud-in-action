@@ -23,4 +23,12 @@ public class LicenseServiceController {
     public License getLicensesById(@RequestBody BaseRequest baseRequest) {
         return licenseService.getLicense("1", "1");
     }
+
+    @RequestMapping(value="/{organizationId}/{licenseId}/{clientType}",method = RequestMethod.GET)
+    public License getLicensesWithClient( @PathVariable("organizationId") String organizationId,
+                                          @PathVariable("licenseId") String licenseId,
+                                          @PathVariable("clientType") String clientType) {
+
+        return licenseService.getLicense(organizationId,licenseId, clientType);
+    }
 }

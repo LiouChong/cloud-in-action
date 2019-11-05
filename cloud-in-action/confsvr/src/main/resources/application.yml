@@ -11,7 +11,7 @@ spring:
         #        将配置信息从git仓库获取
         git:
           uri: https://github.com/LiouChong/cloud-in-action-config/
-          search-paths: licensingservice
+          search-paths: licensingservice,organizationservice
           username:
           password:
 #--------------------------------------------

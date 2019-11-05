@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: organizationService
+  profiles:
+    active: dev
+  cloud:
+    config:
+      enabled: true
+#      uri: http://localhost:8888
+encrypt:
+  key: Antiy
+server:
+  port: 8081
+

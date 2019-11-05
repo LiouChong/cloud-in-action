@@ -1,11 +1,11 @@
 spring:
   application:
-    name: licensingservice
+    name: licensingService
   profiles:
     active:
       dev
   cloud:
     config:
-      uri: http://localhost:8888
+#      uri: http://localhost:8888
 encrypt:
   key: Antiy

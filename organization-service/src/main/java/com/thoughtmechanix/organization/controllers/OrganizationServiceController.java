@@ -1,11 +1,11 @@
-package controllers;
+package com.thoughtmechanix.organization.controllers;
 
 
-import model.Organization;
+import com.thoughtmechanix.organization.model.Organization;
+import com.thoughtmechanix.organization.services.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import services.OrganizationService;
 
 import java.util.Optional;
 
@@ -17,7 +17,7 @@ public class OrganizationServiceController {
 
 
     @RequestMapping(value="/{organizationId}",method = RequestMethod.GET)
-    public Optional<Organization> getOrganization(@PathVariable("organizationId") String organizationId) {
+    public Organization getOrganization(@PathVariable("organizationId") String organizationId) {
         return orgService.getOrg(organizationId);
     }
 

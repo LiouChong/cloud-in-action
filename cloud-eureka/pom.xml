@@ -6,7 +6,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.4.4.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/> <!-- lookup parent from organization.com.tst.repository -->
 	</parent>
 	<groupId>com.cloud</groupId>
 	<artifactId>cloud-eureka</artifactId>
@@ -62,11 +62,11 @@
 	</build>
 
 	<repositories>
-		<repository>
+		<organization.com.tst.repository>
 			<id>spring-milestones</id>
 			<name>Spring Milestones</name>
 			<url>https://repo.spring.io/milestone</url>
-		</repository>
+		</organization.com.tst.repository>
 	</repositories>
 
 </project>

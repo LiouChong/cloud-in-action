@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @RestController
 @RequestMapping(value="v1/organizations")
 public class OrganizationServiceController {
@@ -20,7 +18,7 @@ public class OrganizationServiceController {
     public Organization getOrganization(@PathVariable("organizationId") String organizationId) {
          orgService.getOrg(organizationId);
         Organization organization = new Organization();
-        organization.setId("第一个");
+        organization.setId("第二个");
         return organization;
     }
 

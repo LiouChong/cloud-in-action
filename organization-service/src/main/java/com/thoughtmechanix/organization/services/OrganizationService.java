@@ -5,7 +5,6 @@ import com.thoughtmechanix.organization.repository.OrganizationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -14,6 +13,12 @@ public class OrganizationService {
     private OrganizationRepository orgRepository;
 
     public Organization getOrg(String organizationId) {
+        // zuul进行路由的时候，超过1m的调用都会抛出异常。这里测试是否会抛出这个异常
+        try {
+            Thread.sleep(5500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return orgRepository.findById(organizationId);
     }
 

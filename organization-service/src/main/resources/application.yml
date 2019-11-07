@@ -2,7 +2,7 @@ server:
   port: 8081
 spring:
   application:
-    name: organizationService
+    name: organizationservice
   profiles:
     active: dev
   cloud:

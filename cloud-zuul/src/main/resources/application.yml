@@ -1,0 +1,25 @@
+server:
+  port: 5555
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+#zuul:
+#  routes:
+#    #      将路径映射到服务上
+#    organizationservice: /organization/**
+## zuul使用hystrix和ribbon的库，hystrix对超时1m的调用抛出500异常，ribbon超时5m抛出异常
+## 这里设置hystrix时间1m 为 2.5m
+#hystrix:
+#  command:
+#    default:
+##    这里可以填写服务名，default代表所有的服务.
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 2500
+

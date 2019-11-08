@@ -1,4 +1,4 @@
-package com.cloud.licensingservice.util;
+package com.cloud.cloudzuul.utils;
 
 
 import org.springframework.util.Assert;
@@ -12,8 +12,8 @@ public class UserContextHolder {
         if (context == null) {
             context = createEmptyContext();
             userContext.set(context);
-        }
 
+        }
         return userContext.get();
     }
 

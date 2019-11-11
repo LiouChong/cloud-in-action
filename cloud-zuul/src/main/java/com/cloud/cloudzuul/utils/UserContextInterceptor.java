@@ -10,6 +10,9 @@ import org.springframework.http.client.ClientHttpResponse;
 
 import java.io.IOException;
 
+/**
+ * 调用resttemplate的时候注入线程上下文中的信息
+ */
 public class UserContextInterceptor implements ClientHttpRequestInterceptor {
 
     private static final Logger logger = LoggerFactory.getLogger(UserContextInterceptor.class);

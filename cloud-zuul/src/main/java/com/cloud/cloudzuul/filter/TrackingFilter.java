@@ -81,7 +81,7 @@ public class TrackingFilter extends ZuulFilter {
             loger.info("tms-correlationId-id 在Zuul过滤器中被创建: {}.", filterUtils.getCorrelationId());
         }
         RequestContext ctx = RequestContext.getCurrentContext();
-        loger.info("当前请求uri为： {}.", ctx.getRequest().getRequestURI());
+        loger.info("ZuulFilter当前请求uri为： {}.", ctx.getRequest().getRequestURI());
 
         return null;
     }

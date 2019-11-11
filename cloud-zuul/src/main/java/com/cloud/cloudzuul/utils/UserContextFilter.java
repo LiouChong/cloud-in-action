@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @Component
+/**
+ * 将 header中的信息存储在线程上下文中
+ */
 public class UserContextFilter implements Filter {
     private static final Logger logger = LoggerFactory.getLogger(UserContextFilter.class);
 
@@ -22,7 +25,7 @@ public class UserContextFilter implements Filter {
         UserContextHolder.getContext().setAuthToken(httpServletRequest.getHeader(UserContext.AUTH_TOKEN));
         UserContextHolder.getContext().setOrgId(httpServletRequest.getHeader(UserContext.ORG_ID));
 
-        logger.info("ZuulFilter Filter过滤器的 Correlation id: {}", UserContextHolder.getContext().getCorrelationId());
+        logger.info("Zuul 请求Filter Correlation id: {}", UserContextHolder.getContext().getCorrelationId());
 
         filterChain.doFilter(httpServletRequest, servletResponse);
     }

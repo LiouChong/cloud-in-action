@@ -75,13 +75,13 @@ public class TrackingFilter extends ZuulFilter {
     @Override
     public Object run() {
         if (isCorrelationIdPresent()) {
-            loger.info("tmx-correlation-id 在Zuul过滤器中被发现: {}.", filterUtils.getCorrelationId());
+            loger.info("tmx-correlation-id 在Zuul前置过滤器中被发现: {}.", filterUtils.getCorrelationId());
         } else {
             filterUtils.setCorrelationId(generateCorrelationId());
-            loger.info("tms-correlationId-id 在Zuul过滤器中被创建: {}.", filterUtils.getCorrelationId());
+            loger.info("tms-correlationId-id 在Zuul前置过滤器中被创建: {}.", filterUtils.getCorrelationId());
         }
         RequestContext ctx = RequestContext.getCurrentContext();
-        loger.info("ZuulFilter当前请求uri为： {}.", ctx.getRequest().getRequestURI());
+        loger.info("前置过滤器：ZuulFilter当前请求uri为： {}.", ctx.getRequest().getRequestURI());
 
         return null;
     }

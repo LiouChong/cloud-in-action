@@ -64,7 +64,6 @@ public class LicenseService {
                     // 设置断路器超时时间
                     @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "1000"),
 
-                    //
                     // 10秒最小调用次数
                     @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "10"),
                     // 跳闸必须达到的调用失败的百分比

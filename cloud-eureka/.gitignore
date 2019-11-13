@@ -1,39 +1,16 @@
-HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**
-!**/src/test/**
-
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-### IntelliJ IDEA ###
-.idea
+# Intellij
+.idea/
+*.iml
 *.iws
-*.iml
-*.ipr
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
+# Mac
+.DS_Store
 
-### VS Code ###
-.vscode/
-### Example user template template
-### Example user template
+# Maven
+log/
+target/
+/node_modules/
+/package-lock.json
 
-# IntelliJ project files
-.idea
-*.iml
-out
-gen
+
+/logs/

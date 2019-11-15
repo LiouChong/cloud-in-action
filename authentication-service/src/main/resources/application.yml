@@ -1,0 +1,14 @@
+server:
+  port: 8901
+  contextPath: /auth
+security:
+  basic:
+    enabled: false
+mybatis:
+  type-aliases-package: com.cloud.authenticationservice.model
+  mapper-locations: mapper/*.xml
+
+spring:
+  application:
+    name: oauth
+

@@ -2,13 +2,9 @@ package com.cloud.cloudzuul.filter;
 
 import com.cloud.cloudzuul.config.ZuulConfig;
 import com.cloud.cloudzuul.model.AbTestingRoute;
-import com.netflix.discovery.converters.Auto;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
-import org.apache.http.Header;
-import org.apache.http.HttpHost;
-import org.apache.http.HttpRequest;
-import org.apache.http.HttpResponse;
+import org.apache.http.*;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPatch;
 import org.apache.http.client.methods.HttpPost;
@@ -19,6 +15,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicHttpRequest;
+import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +34,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -75,6 +71,7 @@ public class SpecialRoutesFilter extends ZuulFilter {
     public boolean shouldFilter() {
         return SHOULD_FILTER;
     }
+
     private ProxyRequestHelper helper = new ProxyRequestHelper();
 
     @Override
@@ -105,7 +102,7 @@ public class SpecialRoutesFilter extends ZuulFilter {
         return list.toArray(new BasicHeader[0]);
     }
 
-    private String buildRouteString(String oldEndpoint, String newEndpoint, String serviceName){
+    private String buildRouteString(String oldEndpoint, String newEndpoint, String serviceName) {
         // 获的
         int index = oldEndpoint.indexOf(serviceName);
         String strippedRoute = "";
@@ -159,18 +156,19 @@ public class SpecialRoutesFilter extends ZuulFilter {
     }
 
     private boolean useSpecialRoute(AbTestingRoute testingRoute) {
-//        Random random = new Random();
-//        if ("N".equals(testingRoute.getActive())) {
-//            return false;
-//        }
-//
-//        int value = random.nextInt((10 -1) + 1) + 1;
-//
-//        if (testingRoute.getWeight() < value) {
-            return true;
-//        }
+        /*Random random = new Random();
+        if ("N".equals(testingRoute.getActive())) {
+            return false;
+        }
 
-//        return false;
+        int value = random.nextInt((10 -1) + 1) + 1;
+
+        if (testingRoute.getWeight() < value) {
+        return true;
+        }
+
+        return false;*/
+        return true;
     }
 
     private MultiValueMap<String, String> revertHeaders(Header[] headers) {
@@ -189,17 +187,10 @@ public class SpecialRoutesFilter extends ZuulFilter {
         InputStream requestEntity = null;
         try {
             requestEntity = request.getInputStream();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             // no requestBody is ok.
         }
         return requestEntity;
-    }
-
-    private void setResponse(HttpResponse response) throws IOException {
-        this.helper.setResponse(response.getStatusLine().getStatusCode(),
-                response.getEntity() == null ? null : response.getEntity().getContent(),
-                revertHeaders(response.getAllHeaders()));
     }
 
     private void forwardToSpecialRoute(String route) {
@@ -209,10 +200,8 @@ public class SpecialRoutesFilter extends ZuulFilter {
         RequestContext context = RequestContext.getCurrentContext();
         HttpServletRequest request = context.getRequest();
 
-        MultiValueMap<String, String> headers = this.helper
-                .buildZuulRequestHeaders(request);
-        MultiValueMap<String, String> params = this.helper
-                .buildZuulRequestQueryParams(request);
+        MultiValueMap<String, String> headers = this.helper.buildZuulRequestHeaders(request);
+        MultiValueMap<String, String> params = this.helper.buildZuulRequestQueryParams(request);
         String verb = getVerb(request);
         InputStream requestEntity = getRequestBody(request);
         if (request.getContentLength() < 0) {
@@ -224,20 +213,23 @@ public class SpecialRoutesFilter extends ZuulFilter {
         HttpResponse response = null;
 
         try {
-            httpClient  = HttpClients.createDefault();
+            httpClient = HttpClients.createDefault();
             response = forward(httpClient, verb, route, request, headers,
                     params, requestEntity);
-            setResponse(response);
-        }
-        catch (Exception ex ) {
+            setResponse(response, context);
+        } catch (Exception ex) {
             ex.printStackTrace();
-        }
-        finally{
+        } finally {
             try {
                 httpClient.close();
+            } catch (IOException ex) {
+
             }
-            catch(IOException ex){}
         }
+    }
+
+    private void setResponse(HttpResponse httpResponse, RequestContext context) throws IOException {
+        context.setResponseBody(EntityUtils.toString(httpResponse.getEntity(), "UTF-8"));
     }
 
 
@@ -245,7 +237,7 @@ public class SpecialRoutesFilter extends ZuulFilter {
                                  HttpServletRequest request, MultiValueMap<String, String> headers,
                                  MultiValueMap<String, String> params, InputStream requestEntity)
             throws Exception {
-        Map<String, Object> info = this.helper.debug(verb, uri, headers, params,requestEntity);
+        Map<String, Object> info = this.helper.debug(verb, uri, headers, params, requestEntity);
         URL host = new URL(uri);
         HttpHost httpHost = getHttpHost(host);
 
@@ -266,7 +258,7 @@ public class SpecialRoutesFilter extends ZuulFilter {
                 httpPut.setEntity(entity);
                 break;
             case "PATCH":
-                HttpPatch httpPatch = new HttpPatch(uri );
+                HttpPatch httpPatch = new HttpPatch(uri);
                 httpRequest = httpPatch;
                 httpPatch.setEntity(entity);
                 break;

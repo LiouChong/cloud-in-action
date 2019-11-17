@@ -9,7 +9,6 @@ import com.cloud.licensingservice.pojo.License;
 import com.cloud.licensingservice.pojo.Organization;
 import com.cloud.licensingservice.repository.LicenseRepository;
 import com.cloud.licensingservice.util.UserContextHolder;
-import com.netflix.discovery.converters.Auto;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.slf4j.Logger;
@@ -36,6 +35,8 @@ public class LicenseService {
     OrganizationFeignClient organizationFeignClient;
     @Autowired
     OrganizationRestTemplateClient organizationRestClient;
+    @Autowired
+    private com.cloud.licensingservice.security.OrganizationRestOauthTemplateClient securityTemplate;
 
     @Autowired
     OrganizationDiscoverClient organizationDiscoveryClient;
@@ -160,7 +161,7 @@ public class LicenseService {
                 break;
             case "rest":
                 System.out.println("正在使用rest客户端");
-                organization = organizationRestClient.getOrganization(organizationId);
+                organization = securityTemplate.getOrganization(organizationId);
                 break;
             case "discovery":
                 System.out.println("正在使用服务发现客户端");

@@ -14,14 +14,15 @@ import javax.annotation.Resource;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-@MapperScan("com.cloud.authenticationservice.dao")
 public class AuthenticationServiceApplicationTests {
 	@Resource
 	private UserInfoDao userInfoDao;
 
 	@Test
 	public void contextLoads() {
-		MyUser myUser = userInfoDao.queryUserByUsername("john.carnell");
+		String username = "john.carnell";
+		MyUser myUser = userInfoDao.queryUserByUsername(username);
+		myUser.setRoles(userInfoDao.getUseRole(username));
 		System.out.println(myUser);
 	}
 

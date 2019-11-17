@@ -4,15 +4,16 @@
     <resultMap id="UserInfoMap" type="com.cloud.authenticationservice.model.MyUser">
         <result column="userName" property="userName"/>
         <result column="password" property="password"/>
-        <association property="roles" column="role" javaType="java.lang.String"/>
     </resultMap>
 
     <select id="queryUserByUsername" resultType="com.cloud.authenticationservice.model.MyUser">
         select
-            user_name as userName,
-            password as password,
-            role as role
-        from users u left join user_roles ur on u.user_name = ur.user_name
+            u.user_name as userName,
+            u.password as password
+        from users u
         where u.user_name = #{username} and enabled = 1
+    </select>
+    <select id="getUseRole" resultType="java.lang.String">
+        select role from user_roles where user_name = #{username}
     </select>
 </mapper>

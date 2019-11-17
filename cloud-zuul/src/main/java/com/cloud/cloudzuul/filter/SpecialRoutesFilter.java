@@ -42,7 +42,7 @@ import java.util.Map;
  * Description:
  * date: 2019/11/11 16:32
  */
-@Component
+//@Component
 public class SpecialRoutesFilter extends ZuulFilter {
     private static final int FILTER_ORDER = 1;
     private static final boolean SHOULD_FILTER = true;

@@ -24,7 +24,6 @@ public class LicenseServiceController {
                                @PathVariable("licenseId") String licenseId) {
         License license = new License();
         license.setOrganizationId(organizationId);
-
         return license;
     }
     @RequestMapping(value = "/getValue", method = RequestMethod.POST)

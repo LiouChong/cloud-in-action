@@ -2,6 +2,8 @@ package com.cloud.authenticationservice.dao;
 
 import com.cloud.authenticationservice.model.MyUser;
 
+import java.util.List;
+
 /**
  * Author: Liuchong
  * Description:
@@ -9,4 +11,6 @@ import com.cloud.authenticationservice.model.MyUser;
  */
 public interface UserInfoDao {
     MyUser queryUserByUsername(String username);
+
+    List<String> getUseRole(String username);
 }

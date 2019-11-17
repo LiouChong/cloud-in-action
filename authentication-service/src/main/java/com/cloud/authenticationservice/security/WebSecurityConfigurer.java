@@ -1,5 +1,7 @@
 package com.cloud.authenticationservice.security;
 
+import com.cloud.authenticationservice.mysql.MyService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -9,11 +11,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
  * Author: Liuchong
- * Description: 为应用程序定义用户ID、密码和角色
+ * Description: 配置那些用户可以进行授权
  * date: 2019/11/15 15:26
  */
 @Configuration
 public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
+    @Autowired
+    private MyService myService;
 
     /**
      * authenticationManagerBean被Spring Security用来处理验证
@@ -33,21 +37,21 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
      * @throws Exception
      */
     @Override
-    @Bean
+    @Bean(name = "myUserDetailService")
     public UserDetailsService userDetailsServiceBean() throws Exception {
         return super.userDetailsServiceBean();
     }
 
     /**
-     * configure方法是定义用户、密码和角色的地方
+     * configure方法是验证用户登录正确性的地方
      * @param auth
      * @throws Exception
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("john.carnell").password("password1").roles("USER")
+//        auth.userDetailsService(myService);
+        auth.inMemoryAuthentication().withUser("john.carnell").password("password1").roles("USER")
                 .and()
-                .withUser("willian.woodward").password("password2").roles("USER", "ADMIN");
+                .withUser("william.woodward").password("password2").roles("USER","ADMIN");
     }
 }

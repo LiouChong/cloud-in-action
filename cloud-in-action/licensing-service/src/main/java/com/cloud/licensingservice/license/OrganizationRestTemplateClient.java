@@ -2,6 +2,7 @@ package com.cloud.licensingservice.license;
 
 import com.cloud.licensingservice.pojo.Organization;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 public class OrganizationRestTemplateClient {
 
     @Autowired
+    @Qualifier("restTemplate")
     RestTemplate restTemplate;
 
     public Organization getOrganization(String organizationId) {

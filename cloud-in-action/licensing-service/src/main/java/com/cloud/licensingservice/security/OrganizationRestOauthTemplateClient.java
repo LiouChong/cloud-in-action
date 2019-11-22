@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * Author: Liuchong
- * Description:
+ * Description: 将oauth token在服务之间传递需要的restTemplate特殊类
  * date: 2019/11/16 0016 下午 2:07
  */
 @Component

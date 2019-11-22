@@ -43,7 +43,7 @@ public class LicenseService {
 
     public License getLicense(String organizationId, String licenseId) {
         License license = licenseRepository.findByOrganizationIdAndLicenseId(organizationId, licenseId);
-        license.setProductName(license.getProductName() + config.getExamplePropertty());
+        license.setProductName(license.getProductName() + config.getExampleProperty());
         return license;
     }
 

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 /**
  * Author: Liuchong
  * Description:
- * date: 2019/11/13 13:33
+ * date: 2019/11/22 16:17
  */
 @Component
 public class ZuulConfig {
@@ -15,9 +15,5 @@ public class ZuulConfig {
 
     public String getLicensingServiceZuul() {
         return licensingServiceZuul;
-    }
-
-    public void setLicensingServiceZuul(String licensingServiceZuul) {
-        this.licensingServiceZuul = licensingServiceZuul;
     }
 }

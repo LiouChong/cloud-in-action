@@ -8,6 +8,19 @@ spring:
   cloud:
     config:
       enabled: true
+    stream:
+      bindings:
+        # 通道名称，映射到代码中是source.output()的主题
+        output:
+          # 写入消息的消息队列的名称
+          destination: orgChangeTopic
+          content-type: application/json
+      # 告诉spring使用kakfa作为消息总线（可以使用RabbitMQ）
+      kafka:
+        binder:
+          # 下面两个属性告诉stream，kafka和Zookeeper的网络位置
+          zk-nodes: localhost:2181
+          brokers: localhost:9092
 eureka:
   instance:
     # 注册服务的IP,而不是服务器名称

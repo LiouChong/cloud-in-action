@@ -1,9 +1,6 @@
 package com.cloud.licensingservice.security;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 
 /**
  * Author: Liuchong
@@ -11,8 +8,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
  * date: 2019/11/16 0016 下午 1:22
  */
 @Configuration
-public class ResourceSecurityConfiguration extends ResourceServerConfigurerAdapter {
-    @Override
+public class ResourceSecurityConfiguration/* extends ResourceServerConfigurerAdapter */{
+/*    @Override
     public void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
@@ -22,5 +19,5 @@ public class ResourceSecurityConfiguration extends ResourceServerConfigurerAdapt
             .hasRole("ADMIN")
             .anyRequest()
             .authenticated();
-    }
+    }*/
 }

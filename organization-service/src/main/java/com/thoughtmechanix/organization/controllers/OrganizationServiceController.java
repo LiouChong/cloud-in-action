@@ -36,4 +36,9 @@ public class OrganizationServiceController {
     public void deleteOrganization( @PathVariable("orgId") String orgId,  @RequestBody Organization org) {
         orgService.deleteOrg( org );
     }
+
+    @RequestMapping(value = "/kafkaStream", method = RequestMethod.POST)
+    public void sendMsg() {
+        orgService.sendMsg();
+    }
 }

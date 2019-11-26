@@ -23,7 +23,7 @@ public class OrganizationService {
     }
 
     public void saveOrg(Organization org){
-        org.setId( UUID.randomUUID().toString());
+        org.setName( UUID.randomUUID().toString());
 
         orgRepository.save(org);
 
@@ -37,5 +37,9 @@ public class OrganizationService {
 
     public void deleteOrg(Organization org){
         orgRepository.delete(org);
+    }
+
+    public void sendMsg() {
+        simpleSourceBean.publishOrgChange("actionTest", "idTest");
     }
 }

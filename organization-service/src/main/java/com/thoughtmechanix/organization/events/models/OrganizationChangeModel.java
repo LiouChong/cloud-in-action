@@ -49,5 +49,18 @@ public class OrganizationChangeModel{
         this.correlationId = correlationId;
     }
 
-
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("{");
+        sb.append("\"type\":\"")
+                .append(type).append('\"');
+        sb.append(",\"action\":\"")
+                .append(action).append('\"');
+        sb.append(",\"organizationId\":\"")
+                .append(organizationId).append('\"');
+        sb.append(",\"correlationId\":\"")
+                .append(correlationId).append('\"');
+        sb.append('}');
+        return sb.toString();
+    }
 }

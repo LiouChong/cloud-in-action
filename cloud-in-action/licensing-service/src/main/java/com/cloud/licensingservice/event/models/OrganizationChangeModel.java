@@ -7,8 +7,10 @@ public class OrganizationChangeModel {
     private String correlationId;
 
 
+    public OrganizationChangeModel() {
+    }
+
     public OrganizationChangeModel(String type, String action, String organizationId, String correlationId) {
-        super();
         this.type   = type;
         this.action = action;
         this.organizationId = organizationId;
@@ -49,5 +51,18 @@ public class OrganizationChangeModel {
         this.correlationId = correlationId;
     }
 
-
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("{");
+        sb.append("\"type\":\"")
+                .append(type).append('\"');
+        sb.append(",\"action\":\"")
+                .append(action).append('\"');
+        sb.append(",\"organizationId\":\"")
+                .append(organizationId).append('\"');
+        sb.append(",\"correlationId\":\"")
+                .append(correlationId).append('\"');
+        sb.append('}');
+        return sb.toString();
+    }
 }

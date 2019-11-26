@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,7 +17,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class OrganizationRestOauthTemplateClient {
-    @Autowired
+ /*   @Autowired
     @Qualifier("oauthRestTemplate")
     private OAuth2RestTemplate oAuth2RestTemplate;
 
@@ -34,5 +33,5 @@ public class OrganizationRestOauthTemplateClient {
                 organizationId);
 
         return restExchange.getBody();
-    }
+    }*/
 }

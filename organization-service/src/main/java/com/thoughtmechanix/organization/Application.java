@@ -5,10 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.cloud.stream.messaging.Source;
-import org.springframework.messaging.MessageChannel;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+//import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 
 
@@ -17,7 +15,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 //@EnableFeignClients
 // 使用配置通知
 @RefreshScope
-@EnableResourceServer
+// 资源服务器
+//@EnableResourceServer
 // 告诉cloud stream 将应用程序绑定到消息代理
 @EnableBinding(Source.class)
 public class Application {

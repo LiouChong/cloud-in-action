@@ -161,7 +161,7 @@ public class LicenseService {
                 break;
             case "rest":
                 System.out.println("正在使用rest客户端");
-                organization = securityTemplate.getOrganization(organizationId);
+                organization = organizationRestClient.getOrganization(organizationId);
                 break;
             case "discovery":
                 System.out.println("正在使用服务发现客户端");

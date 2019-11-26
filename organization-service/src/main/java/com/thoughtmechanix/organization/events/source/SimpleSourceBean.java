@@ -1,6 +1,7 @@
 package com.thoughtmechanix.organization.events.source;
 
 import com.thoughtmechanix.organization.events.models.OrganizationChangeModel;
+import com.thoughtmechanix.organization.model.Organization;
 import com.thoughtmechanix.organization.utils.UserContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +23,7 @@ public class SimpleSourceBean {
     }
 
     public void publishOrgChange(String action,String orgId){
-       logger.debug("Sending Kafka message {} for Organization Id: {}", action, orgId);
+        System.out.println("Sending Kafka message "+ action + " for Organization Id: " + orgId);
        // 创建用于发送的实体
         OrganizationChangeModel change =  new OrganizationChangeModel(
                 OrganizationChangeModel.class.getTypeName(),
@@ -32,5 +33,6 @@ public class SimpleSourceBean {
 
         // 发送实体
         source.output().send(MessageBuilder.withPayload(change).build());
+        System.out.println("已发送--------------->> " + change);
     }
 }

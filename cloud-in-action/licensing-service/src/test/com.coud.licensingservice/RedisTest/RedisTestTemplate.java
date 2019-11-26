@@ -9,11 +9,11 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Author: Liuchong
@@ -32,8 +32,8 @@ public class RedisTestTemplate {
 
     @Test
     public void testGet() {
-        List<Object> foo = redisTemplate.opsForHash().values("foo");
-        System.out.println(foo);
+        Set<Object> org = redisTemplate.opsForHash().keys("org");
+        System.out.println(org);
     }
 
     @Test

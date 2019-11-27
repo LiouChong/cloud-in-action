@@ -52,5 +52,20 @@ public class Organization {
         this.contactPhone = contactPhone;
     }
 
-
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("{");
+        sb.append("\"id\":\"")
+                .append(id).append('\"');
+        sb.append(",\"name\":\"")
+                .append(name).append('\"');
+        sb.append(",\"contactName\":\"")
+                .append(contactName).append('\"');
+        sb.append(",\"contactEmail\":\"")
+                .append(contactEmail).append('\"');
+        sb.append(",\"contactPhone\":\"")
+                .append(contactPhone).append('\"');
+        sb.append('}');
+        return sb.toString();
+    }
 }

@@ -1,4 +1,4 @@
-package com.cloud.licensingservice.license;
+package com.cloud.licensingservice.callOrg;
 
 import com.cloud.licensingservice.pojo.Organization;
 import org.springframework.cloud.netflix.feign.FeignClient;

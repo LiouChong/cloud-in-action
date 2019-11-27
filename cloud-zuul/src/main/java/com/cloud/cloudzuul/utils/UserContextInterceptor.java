@@ -12,6 +12,7 @@ import java.io.IOException;
 
 /**
  * 调用resttemplate的时候注入线程上下文中的信息
+ * TODO: 这个类是由于ribbon不会携带线程上下文到下一个调用中还是由于hystrix的原因？
  */
 public class UserContextInterceptor implements ClientHttpRequestInterceptor {
 

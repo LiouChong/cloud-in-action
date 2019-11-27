@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OrganizationRepository extends CrudRepository<Organization,String> {
     Organization findById(String organizationId);
+
+    Integer deleteById(String id);
 }

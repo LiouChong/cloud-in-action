@@ -33,7 +33,13 @@ public class RedisTestTemplate {
     @Test
     public void testGet() {
         Set<Object> org = redisTemplate.opsForHash().keys("org");
+
         System.out.println(org);
+    }
+
+    @Test
+    public void testPut() {
+        redisTemplate.opsForHash().put("org", "foo", "bar");
     }
 
     @Test

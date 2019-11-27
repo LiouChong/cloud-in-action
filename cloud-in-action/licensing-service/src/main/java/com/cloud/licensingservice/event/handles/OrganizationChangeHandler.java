@@ -10,7 +10,7 @@ import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
 
 
-//@EnableBinding(CustomChannels.class)
+@EnableBinding(CustomChannels.class)
 public class OrganizationChangeHandler {
 
     @Autowired
@@ -18,7 +18,7 @@ public class OrganizationChangeHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(OrganizationChangeHandler.class);
 
-//    @StreamListener("inboundOrgChanges")
+    @StreamListener("inboundOrgChanges")
     public void loggerSink(OrganizationChangeModel orgChange) {
         logger.debug("Received a message of type " + orgChange.getType());
         switch(orgChange.getAction()){

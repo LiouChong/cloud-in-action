@@ -1,10 +1,11 @@
 package com.cloud.licensingservice.service;
 
+import com.cloud.licensingservice.callOrg.OrganizationRedisClient;
 import com.cloud.licensingservice.config.ServiceConfig;
 import com.cloud.licensingservice.controller.LicenseServiceController;
-import com.cloud.licensingservice.license.OrganizationDiscoverClient;
-import com.cloud.licensingservice.license.OrganizationFeignClient;
-import com.cloud.licensingservice.license.OrganizationRestTemplateClient;
+import com.cloud.licensingservice.callOrg.OrganizationDiscoverClient;
+import com.cloud.licensingservice.callOrg.OrganizationFeignClient;
+import com.cloud.licensingservice.callOrg.OrganizationRestTemplateClient;
 import com.cloud.licensingservice.pojo.License;
 import com.cloud.licensingservice.pojo.Organization;
 import com.cloud.licensingservice.repository.LicenseRepository;
@@ -15,7 +16,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.beans.ExceptionListener;
 import java.util.*;
 
 /**
@@ -24,6 +27,7 @@ import java.util.*;
  * date: 2019/11/4 11:34
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class LicenseService {
     private static final Logger logger = LoggerFactory.getLogger(LicenseServiceController.class);
 
@@ -37,6 +41,8 @@ public class LicenseService {
     OrganizationRestTemplateClient organizationRestClient;
     @Autowired
     private com.cloud.licensingservice.security.OrganizationRestOauthTemplateClient securityTemplate;
+    @Autowired
+    private OrganizationRedisClient organizationRedisClient;
 
     @Autowired
     OrganizationDiscoverClient organizationDiscoveryClient;
@@ -59,6 +65,7 @@ public class LicenseService {
         license.setOrganizationId(org.toString());
         return license;
     }
+
     @HystrixCommand(
             commandProperties = {
                     // 定制化hystrix
@@ -92,6 +99,7 @@ public class LicenseService {
 
         return licenseRepository.findByOrganizationId(organizationId);
     }
+
     // 使用断路器包装getListLicense()方法。
     // 每当调用时间超过1000ms时，断路器将中断对 getListLicense()方法的调用 。
     @HystrixCommand(
@@ -172,5 +180,10 @@ public class LicenseService {
                 break;
         }
         return organization;
+    }
+
+
+    public Organization getWithRedis(String organizationId) {
+        return organizationRedisClient.getOrgValueById(organizationId);
     }
 }

@@ -1,6 +1,7 @@
 package com.cloud.licensingservice.controller;
 
 import com.cloud.licensingservice.pojo.License;
+import com.cloud.licensingservice.pojo.Organization;
 import com.cloud.licensingservice.pojo.vo.request.BaseRequest;
 import com.cloud.licensingservice.service.LicenseService;
 import com.cloud.licensingservice.util.UserContextHolder;
@@ -48,5 +49,10 @@ public class LicenseServiceController {
     public List<License> saveLicenses( @PathVariable("organizationId") String organizationId) {
         logger.info("LicenseServiceController Correlation id: {}", UserContextHolder.getContext().getCorrelationId());
         return licenseService.getLicensesByOrg(organizationId);
+    }
+
+    @RequestMapping(value = "redis/{orgId}/", method = RequestMethod.GET)
+    public Organization getOrgWithRedis(@PathVariable("orgId") String orgId) {
+        return licenseService.getWithRedis(orgId);
     }
 }
